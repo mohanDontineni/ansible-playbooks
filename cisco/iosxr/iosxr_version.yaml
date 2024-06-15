@@ -1,0 +1,14 @@
+#Get version Information on CISCO IOS-XR
+---
+- name: IOS-XR 
+  hosts: all
+  gather_facts: no
+  strategy: free
+  tasks:
+    - name: Get version
+      cisco.iosxr.iosxr_command:
+        commands:
+          - show version
+      ignore_errors: yes
+      failed_when: false
+      register: showVersion
