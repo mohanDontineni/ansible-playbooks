@@ -1,6 +1,6 @@
 ---
 - name: Add multiline configuration to Cisco IOS XR device
-  hosts: iosxr_device
+  hosts: all
   gather_facts: no
   tasks:
     - name: Configure multiline settings
