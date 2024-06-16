@@ -1,29 +1,16 @@
 ---
-- name: Configure Cisco IOS XR device
-  hosts: all
+- name: Add multiline configuration to Cisco IOS XR device
+  hosts: iosxr_device
   gather_facts: no
   tasks:
-    - name: Configure interface GigabitEthernet0/0/0/0
-      cisco.iosxr.iosxr_interface:
-        name: GigabitEthernet0/0/0/0
-        description: Configured by Ansible
-        enabled: true
-        ipv4:
-          address: 10.0.0.2
-          mask: 24
-
-    - name: Set hostname
-      cisco.iosxr.iosxr_system:
-        hostname: Mohan_testing
-
-    - name: Configure NTP server
-      cisco.iosxr.iosxr_ntp:
-        config:
-          - server: 10.0.0.1
-
-    - name: Configure SNMP
-      cisco.iosxr.iosxr_snmp:
-        config:
-          - community: public
-            access_list: 10
-            readonly: true
+    - name: Configure multiline settings
+      cisco.iosxr.iosxr_config:
+        lines:
+          - "interface GigabitEthernet0/0/0/1"
+          - " description Configured by Ansible with multiline config"
+          - " no shutdown"
+          - " ip address 192.168.3.1 255.255.255.0"
+          - "interface GigabitEthernet0/0/0/2"
+          - " description Another interface configured by Ansible"
+          - " no shutdown"
+          - " ip address 192.168.4.1 255.255.255.0"
